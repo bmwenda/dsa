@@ -60,7 +60,7 @@ def traverse_inorder_iter(root):
     stack = []
     current_node = root
 
-    while (len(stack) > 0) or current_node is not None:
+    while current_node or stack:
         while current_node:
             stack.append(current_node)
             current_node = current_node.left
@@ -69,7 +69,6 @@ def traverse_inorder_iter(root):
         current_node = current_node.right
 
 def traverse_inorder(root):
-    # traverse inorder
     if root.left:
         traverse_inorder(root.left)
     print(root.value, end=(" "))
@@ -97,19 +96,30 @@ def breadth_first_search(root):
         if current_node.right:
             queue.append(current_node.right)
 
-if __name__ == "__main__":
-    root = Node(4)
-    root.left = Node(2)
-    root.right = Node(6)
-    root.left.left = Node(1)
-    root.left.right = Node(3)
-    root.right.left = Node(5)
-    root.right.right = Node(7)
-    # traverse_preorder_iter(root)
-    # traverse_preorder(root)
+# time complexity - O(n)
+# space complexity - O(h) -> h = height of tree, worst O(n)
+def maximum_depth(root):
+    if root is None:
+        return 0
+    return 1 + max(maximum_depth(root.left), maximum_depth(root.right))
 
-    # traverse_inorder(root)
-    # traverse_inorder_iter(root)
-
-    # traverse_postorder(root)
-    breadth_first_search(root)
+# time complexity - O(n)
+# space complexity - O(n) -> h = height of tree, worst O(n)
+def max_depth_iter(root):
+    if root is None:
+        return 0
+    queue = deque([root])
+    levels = 0
+    result = []
+    while len(queue):
+        result.append([])
+        # for each level, do the stack update and increment the level count when done
+        for i in range(len(queue)):
+            current = queue.popleft()
+            result[levels].append(current.value)
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+        levels += 1
+    return result
