@@ -15,9 +15,9 @@ use cases:
 # space: O(n)
 
 class TrieNode:
-    def __init__(self, children={}, is_end=False):
-        self.children = children
-        self.is_end = is_end
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
 
 
 class Trie:
