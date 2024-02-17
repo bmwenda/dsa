@@ -1,10 +1,10 @@
-"""Reverse array in place
-Two pointers technique
+"""Two pointers technique
 """
 
 # time complexity: O(n)
 # space complexity: O(1)
 def reverse(arr):
+    """Reverse array in place"""
     i = 0
     j = len(arr) - 1
 
